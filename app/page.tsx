@@ -15,7 +15,7 @@ const Home = () => {
       title: "Backend Systems",
       icon: Server,
       description:
-        "Building REST APIs, real-time services, authentication systems, and database-driven applications with Django, PostgreSQL, Redis, and WebSockets.",
+        "Building REST APIs, real-time services, authentication systems, and database-driven applications with Django, PostgreSQL, Redis, JWT Auth, and WebSockets.",
     },
     {
       title: "Frontend Engineering",
@@ -37,14 +37,14 @@ const Home = () => {
   const contactMethods = [
     {
       name: "Email",
-      description: "Send me a message",
+      description: "dangitau9824@gmail.com",
       href: "mailto:dangitau9824@gmail.com",
       icon: GmailIcon,
       iconClass: "bg-red-100 text-red-600 dark:bg-red-950 dark:text-red-400",
     },
     {
       name: "Phone",
-      description: "Call me",
+      description: "+254 703 509 598",
       href: "tel:+254703509598",
       icon: Phone,
       iconClass: "bg-blue-100 text-blue-600 dark:bg-blue-950 dark:text-blue-400",
@@ -132,7 +132,7 @@ const Home = () => {
               About Me
             </h2>
             <p className="text-base leading-relaxed text-slate-600 dark:text-slate-400 sm:text-lg">
-              I'm a Business Information Technology graduate who enjoys building software that solves real problems. I work across the stack, with aparticular interest in backend architecture, APIs, databases, and real-time systems.
+              I'm a Business Information Technology graduate who enjoys building software that solves real problems. I work across the stack, with a particular interest in backend architecture, APIs, databases, and real-time systems.
             </p>
           </FadeIn>
 
@@ -180,7 +180,7 @@ const Home = () => {
                 </h2>
 
                 <p className="mt-3 max-w-2xl text-slate-600 dark:text-slate-400">
-                  A few projects I've built to solve real-world problems.
+                  A few projects I've built to solve real-world problems. More on <a href="https://github.com/dannyduke77" className="text-blue-400 hover:text-blue-500" target="_blank"><GithubIcon className="h-4 w-4 inline" /> GitHub</a>.
                 </p>
               </div>
             </div>
@@ -314,7 +314,7 @@ const Home = () => {
                           {contact.name}
                         </p>
 
-                        <p className="mt-0.5 truncate text-xs text-slate-500 dark:text-slate-400">
+                        <p className="mt-0.5 truncate text-[13px] text-slate-500 dark:text-slate-400">
                           {contact.description}
                         </p>
                       </div>

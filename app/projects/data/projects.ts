@@ -1,4 +1,181 @@
 const projects = [
+  {
+    slug: "rentwise",
+    title: "RentWise Management",
+
+    shortDescription:
+      "Property management platform for tracking unit occupancy, rent collection, tenant ledgers, arrears, and financial reporting, with automated receipts and exports.",
+    description:
+      "A multi-business rental management platform where tenants pay rent via M-Pesa and landlords track arrears, issue PDF receipts and statements, and export their data, all in one place.",
+    overview:
+      "RentWise is a comprehensive rental property management application designed for landlords and property managers to track unit occupancies, streamline rent collection, manage tenant records, and handle complex financial workflows without administrative friction.",
+
+    features: [
+      "M-Pesa integration for direct rent payments via the tenant portal",
+      "Multi-business platform with organisation-level data isolation",
+      "Multi-property & unit management with tenant & roommate tracking",
+      "Automated rent & arrears ledger calculations",
+      "M-Pesa, cash & bank deposit refund recording",
+      "Custom charges for repairs & late fees",
+      "On-demand PDF receipts & financial statements",
+      "One-click CSV/Excel data exports",
+    ],
+
+    stack: [
+      "Next.js",
+      "Django REST Framework",
+      "PostgreSQL",
+      "Docker",
+      "Tailwind CSS",
+    ],
+
+    github: "https://github.com/DannyDuke77/RentWise",
+
+    demo: "#",
+
+    screenshots: [
+      {
+        src: "/images/projects/rentwise/marketing-page.png",
+        alt: "RentWise marketing landing page",
+        title: "Landing Page",
+        description:
+          "Public landing page highlighting automated M-Pesa rent collection, key features, step-by-step workflow, and landlord portal access.",
+      },
+      {
+        src: "/images/projects/rentwise/dashboard.png",
+        alt: "RentWise main dashboard view",
+        title: "Main Dashboard",
+        description:
+          "Central overview showcasing key metrics, overdue rent lists, recent transactions, monthly collections, and portfolio occupancy charts.",
+      },
+      {
+        src: "/images/projects/rentwise/properties-page.png",
+        alt: "RentWise properties list",
+        title: "Properties Overview",
+        description:
+          "Overview of all properties, unit statuses, and total occupancy stats.",
+      },
+      {
+        src: "/images/projects/rentwise/property-units.png",
+        alt: "RentWise property units view",
+        title: "Property Units",
+        description:
+          "Unit-level management view displaying specific apartment layouts, tenant assignments, and financial statuses.",
+      },
+      {
+        src: "/images/projects/rentwise/units-page.png",
+        alt: "RentWise global units management page",
+        title: "Global Units Directory",
+        description:
+          "Comprehensive management table listing all units across all properties, complete with status filters, balances, and deposits.",
+      },
+      {
+        src: "/images/projects/rentwise/unit-details.png",
+        alt: "RentWise unit occupancy and lease details",
+        title: "Unit Occupancy Details",
+        description:
+          "Detailed view of an individual unit displaying primary tenant information, contact details, ID numbers, and lease termination controls.",
+      },
+      {
+        src: "/images/projects/rentwise/unit-payment.png",
+        alt: "RentWise unit payment management and recording",
+        title: "Unit Payment Management",
+        description:
+          "Unit-specific account balance tracking interface with instant recording options for cash and M-Pesa transactions.",
+      },
+      {
+        src: "/images/projects/rentwise/unit-charges.png",
+        alt: "RentWise unit charges management tab",
+        title: "Unit Charges Tab",
+        description:
+          "Specific unit view for creating and tracking individual utility, damage, or late fee charges.",
+      },
+      {
+        src: "/images/projects/rentwise/charges-page.png",
+        alt: "RentWise charges tracking page",
+        title: "Property Charges",
+        description:
+          "Comprehensive tracking dashboard for property charges, status breakdown, and itemized billing records.",
+      },
+      {
+        src: "/images/projects/rentwise/payments-page.png",
+        alt: "RentWise payments dashboard page",
+        title: "Payments Transactions & Analytics",
+        description:
+          "Comprehensive transactions ledger with summary analytics for total revenue, payment method breakdowns, filtering controls, and CSV export options.",
+      },
+      {
+        src: "/images/projects/rentwise/payment-visual.png",
+        alt: "RentWise payment analytics and visualization modal",
+        title: "Payment Analytics & Visualizations",
+        description:
+          "Graphical data visualization modal displaying payment method distributions, payment versus refund comparisons, and monthly transaction trends.",
+      },
+      {
+        src: "/images/projects/rentwise/initiate-stk.png",
+        alt: "Tenant M-Pesa STK Push payment modal",
+        title: "M-Pesa STK Push Modal",
+        description:
+          "Interactive modal dialogue for tenants to trigger real-time M-Pesa STK Push payments with custom amounts, phone numbers, and payment notes.",
+      },
+      {
+        src: "/images/projects/rentwise/tenant-dashboard.png",
+        alt: "RentWise tenant portal dashboard",
+        title: "Tenant Portal Dashboard",
+        description:
+          "Dedicated portal view for tenants to track rent balances, unapplied credits, contact details, pending charges, and active tenancies.",
+      },
+      {
+        src: "/images/projects/rentwise/tenant-payments-page.png",
+        alt: "RentWise tenant payment history page",
+        title: "Tenant Payment History",
+        description:
+          "Transaction history ledger within the tenant portal showing past rent and deposit payments with downloadable receipts.",
+      },
+      {
+        src: "/images/projects/rentwise/business-settings.png",
+        alt: "RentWise business settings page",
+        title: "Business Settings",
+        description:
+          "Management interface for business details, contact information, address, logo, and default currency.",
+      },
+      {
+        src: "/images/projects/rentwise/business-switcher.png",
+        alt: "RentWise business switcher menu",
+        title: "Multi-Tenant Business Switcher",
+        description:
+          "Dropdown selector allowing property managers to switch between multiple business entities or create a new business.",
+      },
+      {
+        src: "/images/projects/rentwise/team-settings.png",
+        alt: "RentWise team management settings page",
+        title: "Team Management Settings",
+        description:
+          "Administrative settings panel for managing existing team members, roles, permissions, and pending invitations.",
+      },
+      {
+        src: "/images/projects/rentwise/invite-team-member.png",
+        alt: "RentWise invite team member modal",
+        title: "Invite Team Member Modal",
+        description:
+          "Modal dialog for sending email invitations to new team members to a business with customizable role assignments such as Staff or Manager.",
+      },
+      {
+        src: "/images/projects/rentwise/charges-settings.png",
+        alt: "RentWise charge types settings page",
+        title: "Charge Types Settings",
+        description:
+          "Configuration view for creating, defining, and managing custom fee types and default amounts.",
+      },
+      {
+        src: "/images/projects/rentwise/mpesa-settings.png",
+        alt: "RentWise M-Pesa integration settings page",
+        title: "M-Pesa Integration Settings",
+        description:
+          "Configuration panel for Safaricom Daraja API credentials, encrypted keys, payment shortcodes, and environment toggles.",
+      },
+    ],
+  },
   { 
     slug: "flux",
     title: "FLUX Ticketing System",
@@ -6,7 +183,7 @@ const projects = [
     shortDescription: 
       "Real-time departmental issue ticketing system with active updates, role-based workflows, and automated PDF performance reports.",
     description:
-      "FLUX is a real-time ticketing system built to give departments a structured way to manage internal issues from submission through resolution. Tickets can be assigned, updated, prioritized, and tracked through role-based workflows, while live updates keep users synchronized without requiring page refreshes. The platform also maintains detailed ticket logs and generates PDF performance reports, backed by a Django API, PostgreSQL, Redis, WebSockets, and a containerized deployment architecture.",
+      "A real-time internal ticketing platform with department-based access and organisation-level data isolation, live updates over WebSockets, activity tracking, and CSV/PDF reporting.",
 
     overview:
       "FLUX is a real-time departmental ticketing platform designed to streamline issue reporting, assignment, tracking, and resolution. The system combines a Next.js frontend with a Django backend, WebSockets for live updates, Redis for real-time communication, and PostgreSQL for persistent data.",
@@ -83,115 +260,6 @@ const projects = [
         description: "Secure authentication interface for accessing the FLUX platform.",
       },
     ],
-  },
-  {
-    slug: "rentwise",
-    title: "RentWise Management",
-
-    shortDescription: 
-      "Property management platform for tracking unit occupancy, rent collection, tenant ledgers, arrears, and financial reporting, with automated receipts and exports.",
-    description: 
-      "Built to replace manual paperwork and fragmented spreadsheets, RentWise centralizes property management in a modern, real-time dashboard. It streamlines rental operations including unit occupancy, rent collection, tenant ledgers, arrears tracking, and deposit refunds. With configurable charges, on-demand PDF receipts, and one-click financial exports, RentWise gives property managers a clearer view and greater control over their rental operations.",
-    overview: 
-      "RentWise is a comprehensive rental property management application designed for landlords and property managers to track unit occupancies, streamline rent collection, manage tenant records, and handle complex financial workflows without administrative friction.",
-
-    features: [
-      "Multi-property & unit management",
-      "Tenant & roommate tracking",
-      "Automated rent & arrears ledger calculations",
-      "M-Pesa, cash & bank deposit refund recording",
-      "Custom charges for repairs & late fees",
-      "On-demand PDF receipts & statements",
-      "One-click CSV/Excel data exports",
-      "Customizable business & user settings",
-    ],
-
-    stack: [
-      "Next.js",
-      "Django REST Framework",
-      "PostgreSQL",
-      "Docker",
-      "Tailwind CSS",
-    ],
-
-    github: "https://github.com/DannyDuke77/RentWise",
-
-    demo: "#",
-
-    screenshots: [
-      {
-        src: "/images/projects/rentwise/properties.png",
-        alt: "RentWise properties list",
-        title: "Properties Overview",
-        description: "Overview of all properties, unit statuses, and total occupancy stats.",
-      },
-      {
-        src: "/images/projects/rentwise/login.png",
-        alt: "RentWise login screen",
-        title: "Authentication",
-        description: "Login interface for accessing the landlord dashboard.",
-      },
-      {
-        src: "/images/projects/rentwise/property-page.png",
-        alt: "RentWise property details",
-        title: "Property Details",
-        description: "Detailed summary of rent collections, occupancy, and individual unit status. Generate a detailed property ledger report.",
-      },
-      {
-        src: "/images/projects/rentwise/unit-details.png",
-        alt: "RentWise unit details modal",
-        title: "Unit Details",
-        description: "View occupancy information, tenant details, and lease options.",
-      },
-      {
-        src: "/images/projects/rentwise/unit-payments.png",
-        alt: "RentWise unit payments modal",
-        title: "Unit Payment Ledger",
-        description: "Track individual unit billing cycles, account balances, and transaction history. Print individual receipts and full Excel reports.",
-      },
-      {
-        src: "/images/projects/rentwise/refunds.png",
-        alt: "RentWise refund processing modals",
-        title: "Process Refunds",
-        description: "Interfaces for returning security deposits and credit balances to tenants via M-Pesa, Bank, or Cash.",
-      },
-      {
-        src: "/images/projects/rentwise/unit-charges.png",
-        alt: "RentWise unit charges modal",
-        title: "Unit Charges",
-        description: "Interface for adding and viewing extra charges and fees.",
-      },
-      {
-        src: "/images/projects/rentwise/payments.png",
-        alt: "RentWise payment history",
-        title: "Payments Management",
-        description: "Track payment transactions, total collection, and tenant refunds.",
-      },
-      {
-        src: "/images/projects/rentwise/tenants.png",
-        alt: "RentWise tenant directory",
-        title: "Tenant Directory",
-        description: "Manage tenant contact details, status, and occupancy history.",
-      },
-      {
-        src: "/images/projects/rentwise/settings1.png",
-        alt: "RentWise account settings business profile",
-        title: "Business Profile Settings",
-        description: "Manage company branding, address, and default currency.",
-      },
-      {
-        src: "/images/projects/rentwise/settings2.png",
-        alt: "RentWise account settings user profile",
-        title: "User Settings",
-        description: "Update personal profile information and contact details.",
-      },
-      {
-        src: "/images/projects/rentwise/settings3.png",
-        alt: "RentWise account settings charge configurations",
-        title: "Charge Configuration",
-        description: "Set up and manage standard fee types and default amounts.",
-      },
-    ]
   },
 
   {

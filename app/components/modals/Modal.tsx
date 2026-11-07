@@ -82,7 +82,7 @@ const Modal: React.FC<ModalProps> = ({isOpen, close, label, headerAction, conten
                     </div>
                     
                     {/* Content */}
-                    <div className="p-6 max-h-[80vh] overflow-y-auto custom-scrollbar">
+                    <div className="p-2 max-h-[90vh] overflow-y-auto custom-scrollbar">
                         {content}
                     </div>
                 </div>
