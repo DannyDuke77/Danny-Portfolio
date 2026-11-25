@@ -9,86 +9,93 @@ interface ModalProps {
   label: string;
   headerAction?: ReactNode;
   content: ReactElement;
-  maxWidth?: string; // Optional prop for max width
+  maxWidth?: string; // full Tailwind class, e.g. "max-w-4xl"
 }
 
-const Modal: React.FC<ModalProps> = ({isOpen, close, label, headerAction, content, maxWidth}) => {
-    const [showModal, setShowModal] = useState(isOpen);
+const Modal: React.FC<ModalProps> = ({
+  isOpen,
+  close,
+  label,
+  headerAction,
+  content,
+  maxWidth = "max-w-4xl",
+}) => {
+  const [showModal, setShowModal] = useState(isOpen);
 
-    // Prevent background scroll when modal is active
-    useEffect(() => {
-        setShowModal(isOpen);
+  useEffect(() => {
+    setShowModal(isOpen);
 
-        if (isOpen) {
-            document.body.style.overflow = "hidden";
-        } else {
-            document.body.style.overflow = "unset";
-        }
-        return () => {
-            document.body.style.overflow = "unset";
-        };
-    }, [isOpen]);
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isOpen]);
 
-    const handleClose = useCallback(() => {
-        setShowModal(false);
-        setTimeout(() => {
-            close();
-        }, 500);
-    }, [close]);
+  const handleClose = useCallback(() => {
+    setShowModal(false);
+    setTimeout(() => {
+      close();
+    }, 400);
+  }, [close]);
 
-    // Handle Escape key closing
-    useEffect(() => {
+  useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-        if (e.key === "Escape") close();
+      if (e.key === "Escape") close();
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-    }, [close]);
+  }, [close]);
 
-    if (!isOpen) return null;
+  if (!isOpen) return null;
 
-    return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6">
-            {/* Backdrop with stronger blur */}
-            <div 
-                className={`absolute inset-0 bg-black/70 backdrop-blur-sm transition-opacity duration-300 ${
-                    showModal ? 'opacity-100' : 'opacity-0'
-                }`}
-            />
-            
-            {/* Modal Container */}
-            <div className={`relative w-full max-w-${maxWidth || "4xl"} transition-all duration-500 ease-out ${
-                showModal 
-                ? 'opacity-100 scale-100 translate-y-0' 
-                : 'opacity-0 scale-95 translate-y-60'
-            }`}>
-                <div className="bg-slate-950 border border-gray-700/50 rounded-2xl shadow-2xl overflow-hidden shadow-black/50">
-                    {/* Header */}
-                    <div className="border-b border-gray-800 px-6 py-4 flex items-center justify-between bg-gray-900/50">
-                        <h3 className="text-xl font-bold text-white tracking-tight">
-                            {label}
-                        </h3>
-                        <div className="flex items-center gap-4">
-                            {headerAction}
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6">
+      {/* Backdrop */}
+      <div
+        className={`absolute inset-0 bg-stone-900/70 backdrop-blur-[2px] transition-opacity duration-300 dark:bg-black/80 ${
+          showModal ? "opacity-100" : "opacity-0"
+        }`}
+        onClick={handleClose}
+      />
 
-                            <button
-                                onClick={handleClose}
-                                className="p-2 text-gray-400 hover:text-white hover:bg-gray-800 rounded-xl transition-all"
-                                aria-label="Close modal"
-                            >
-                                <X className="w-6 h-6" />
-                            </button>
-                        </div>
-                    </div>
-                    
-                    {/* Content */}
-                    <div className="p-2 max-h-[90vh] overflow-y-auto custom-scrollbar">
-                        {content}
-                    </div>
-                </div>
+      {/* Panel */}
+      <div
+        className={`relative w-full ${maxWidth} transition-all duration-300 ease-out ${
+          showModal
+            ? "opacity-100 translate-y-0"
+            : "opacity-0 translate-y-4"
+        }`}
+      >
+        <div className="overflow-hidden border border-stone-200 bg-stone-50 dark:border-stone-800 dark:bg-stone-900">
+          {/* Header */}
+          <div className="flex items-center justify-between border-b border-stone-200 px-5 py-3.5 dark:border-stone-800">
+            <h3 className="font-mono text-sm uppercase tracking-[0.2em] text-stone-900 dark:text-stone-100">
+              {label}
+            </h3>
+            <div className="flex items-center gap-3">
+              {headerAction}
+              <button
+                onClick={handleClose}
+                className="flex h-8 w-8 items-center justify-center border border-stone-200 text-stone-500 transition-colors hover:border-lime-700 hover:text-lime-700 dark:border-stone-800 dark:text-stone-400 dark:hover:border-lime-300 dark:hover:text-lime-300"
+                aria-label="Close modal"
+              >
+                <X className="h-4 w-4" />
+              </button>
             </div>
+          </div>
+
+          {/* Content */}
+          <div className="max-h-[85vh] overflow-y-auto p-4 sm:p-5">
+            {content}
+          </div>
         </div>
-    );
-}
+      </div>
+    </div>
+  );
+};
 
 export default Modal;

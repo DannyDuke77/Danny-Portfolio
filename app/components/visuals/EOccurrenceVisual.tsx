@@ -51,31 +51,11 @@ const cases = [
 ];
 
 const timeline = [
-  {
-    label: "Case reported",
-    time: "08:42",
-    icon: ClipboardList,
-  },
-  {
-    label: "Investigator assigned",
-    time: "09:16",
-    icon: UserRound,
-  },
-  {
-    label: "Evidence added",
-    time: "10:03",
-    icon: Fingerprint,
-  },
-  {
-    label: "Investigation in progress",
-    time: "11:27",
-    icon: FileSearch,
-  },
-  {
-    label: "Prosecutor review",
-    time: "Pending",
-    icon: Gavel,
-  },
+  { label: "Case reported", time: "08:42", icon: ClipboardList },
+  { label: "Investigator assigned", time: "09:16", icon: UserRound },
+  { label: "Evidence added", time: "10:03", icon: Fingerprint },
+  { label: "Investigation in progress", time: "11:27", icon: FileSearch },
+  { label: "Prosecutor review", time: "Pending", icon: Gavel },
 ];
 
 export default function EoccurrenceVisual() {
@@ -89,7 +69,6 @@ export default function EoccurrenceVisual() {
       setCaseIndex((current) => (current + 1) % cases.length);
       setTimelineIndex(0);
     }, 6500);
-
     return () => clearInterval(timer);
   }, []);
 
@@ -99,212 +78,159 @@ export default function EoccurrenceVisual() {
         current < timeline.length - 1 ? current + 1 : current,
       );
     }, 1200);
-
     return () => clearInterval(timer);
   }, [caseIndex]);
 
+  const priorityClass =
+    currentCase.priority === "Critical"
+      ? "text-red-700 dark:text-red-400"
+      : currentCase.priority === "High"
+        ? "text-amber-700 dark:text-amber-400"
+        : "text-stone-500 dark:text-stone-400";
+
   return (
-    <div className="relative w-full overflow-hidden rounded-3xl border border-slate-800 bg-[#080c14] p-5 shadow-2xl shadow-slate-950/50 sm:p-7">
-      {/* Ambient background */}
-      <div className="pointer-events-none absolute -right-32 -top-32 h-80 w-80 rounded-full bg-red-500/[0.06] blur-3xl" />
-      <div className="pointer-events-none absolute -bottom-40 -left-32 h-80 w-80 rounded-full bg-blue-500/[0.06] blur-3xl" />
-
+    <div className="relative w-full overflow-hidden border border-stone-200 bg-white dark:border-stone-800 dark:bg-stone-900">
       {/* Header */}
-      <div className="relative flex items-center justify-between">
+      <div className="flex items-center justify-between border-b border-stone-200 px-5 py-4 dark:border-stone-800">
         <div className="flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-slate-700 bg-slate-900">
-            <Shield className="h-5 w-5 text-slate-300" />
+          <div className="flex h-9 w-9 items-center justify-center border border-stone-200 text-stone-700 dark:border-stone-800 dark:text-stone-300">
+            <Shield className="h-5 w-5" />
           </div>
-
           <div>
-            <p className="text-sm font-bold tracking-tight text-white">
+            <p className="font-mono text-sm uppercase tracking-[0.2em] text-stone-900 dark:text-stone-100">
               eOccurrence
             </p>
-
-            <p className="text-[11px] text-slate-500">
-              Criminal Case Management
+            <p className="font-mono text-sm text-stone-500 dark:text-stone-400">
+              Criminal case management
             </p>
           </div>
         </div>
 
-        <div className="flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/[0.07] px-3 py-1.5">
-          <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-400" />
-
-          <span className="text-[10px] font-medium text-emerald-400">
-            Secure System
+        <div className="flex items-center gap-2">
+          <span className="h-1.5 w-1.5 animate-pulse bg-emerald-700 dark:bg-emerald-400" />
+          <span className="font-mono text-xs uppercase tracking-[0.15em] text-emerald-700 dark:text-emerald-400">
+            Secure system
           </span>
         </div>
       </div>
 
       {/* Main content */}
-      <div className="relative mt-6 grid gap-5 lg:grid-cols-[1.15fr_0.85fr]">
-        {/* ================================================================
-            CASE OVERVIEW
-        ================================================================= */}
-
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={currentCase.number}
-            initial={{ opacity: 0, x: -12 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: 12 }}
-            transition={{ duration: 0.4 }}
-            className="overflow-hidden rounded-2xl border border-slate-800 bg-slate-900/80"
-          >
-            {/* Case header */}
-            <div className="flex items-center justify-between gap-3 border-b border-slate-800 bg-slate-900 px-4 py-3">
-              <div className="flex items-center gap-2">
-                <BadgeAlert className="h-4 w-4 text-red-400" />
-
-                <span className="font-mono text-[10px] font-semibold tracking-wide text-slate-400">
-                  CASE {currentCase.number}
+      <div className="grid lg:grid-cols-[1.15fr_0.85fr]">
+        {/* Case overview */}
+        <div className="border-b border-stone-200 lg:border-r lg:border-b-0 dark:border-stone-800">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentCase.number}
+              initial={{ opacity: 0, x: -8 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 8 }}
+              transition={{ duration: 0.35 }}
+            >
+              {/* Case header */}
+              <div className="flex items-center justify-between gap-3 border-b border-stone-200 px-5 py-3 dark:border-stone-800">
+                <div className="flex items-center gap-2">
+                  <BadgeAlert className="h-4 w-4 text-red-700 dark:text-red-400" />
+                  <span className="font-mono text-xs uppercase tracking-[0.15em] text-stone-500 dark:text-stone-400">
+                    Case {currentCase.number}
+                  </span>
+                </div>
+                <span className={`font-mono text-xs font-semibold uppercase tracking-[0.15em] ${priorityClass}`}>
+                  {currentCase.priority} priority
                 </span>
               </div>
 
-              <span
-                className={`rounded-full border px-2.5 py-1 text-[9px] font-semibold ${
-                  currentCase.priority === "Critical"
-                    ? "border-red-500/20 bg-red-500/10 text-red-400"
-                    : currentCase.priority === "High"
-                      ? "border-amber-500/20 bg-amber-500/10 text-amber-400"
-                      : "border-blue-500/20 bg-blue-500/10 text-blue-400"
-                }`}
-              >
-                {currentCase.priority.toUpperCase()} PRIORITY
-              </span>
-            </div>
-
-            <div className="p-4 sm:p-5">
-              {/* Offense */}
-              <div className="flex items-start justify-between gap-5">
-                <div>
-                  <p className="text-[10px] uppercase tracking-widest text-slate-600">
-                    Offense
-                  </p>
-
-                  <h3 className="mt-1 text-2xl font-bold tracking-tight text-white">
-                    {currentCase.offense}
-                  </h3>
-
-                  <p className="mt-1 text-xs text-slate-500">
-                    {currentCase.location} · Felony Case
-                  </p>
-                </div>
-
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-red-500/10 bg-red-500/[0.06]">
-                  <Gavel className="h-5 w-5 text-red-400" />
-                </div>
-              </div>
-
-              {/* Current status */}
-              <div className="mt-6 rounded-xl border border-slate-800 bg-[#080c14] p-3.5">
-                <div className="flex items-center justify-between">
-                  <span className="text-[10px] uppercase tracking-wider text-slate-600">
-                    Current status
-                  </span>
-
-                  <span className="flex items-center gap-1.5 text-[10px] font-semibold text-blue-400">
-                    <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-blue-400" />
-                    {currentCase.status}
-                  </span>
-                </div>
-
-                <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-slate-800">
-                  <motion.div
-                    animate={{
-                      width: `${
-                        ((timelineIndex + 1) / timeline.length) * 100
-                      }%`,
-                    }}
-                    transition={{ duration: 0.5 }}
-                    className="h-full rounded-full bg-blue-500"
-                  />
-                </div>
-              </div>
-
-              {/* Stats */}
-              <div className="mt-3 grid grid-cols-3 gap-2">
-                <CaseStat
-                  icon={<Fingerprint />}
-                  value={currentCase.evidence}
-                  label="Evidence"
-                />
-
-                <CaseStat
-                  icon={<UserRound />}
-                  value={currentCase.persons}
-                  label="Persons of Interest"
-                />
-
-                <CaseStat
-                  icon={<ClipboardList />}
-                  value={currentCase.statements}
-                  label="Statements"
-                />
-              </div>
-
-              {/* Investigator */}
-              <div className="mt-3 flex items-center justify-between rounded-xl border border-slate-800 bg-[#080c14] px-3.5 py-3">
-                <div className="flex items-center gap-2.5">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-slate-800">
-                    <UserRound className="h-3.5 w-3.5 text-slate-400" />
-                  </div>
-
+              <div className="px-5 py-4">
+                {/* Offense */}
+                <div className="flex items-start justify-between gap-5">
                   <div>
-                    <p className="text-[9px] text-slate-600">
-                      Assigned investigator
+                    <p className="font-mono text-xs uppercase tracking-[0.15em] text-stone-500 dark:text-stone-400">
+                      Offense
                     </p>
+                    <h3 className="mt-1 text-2xl font-semibold tracking-tight text-stone-900 dark:text-stone-100">
+                      {currentCase.offense}
+                    </h3>
+                    <p className="mt-1 font-mono text-sm text-stone-500 dark:text-stone-400">
+                      {currentCase.location} · Felony case
+                    </p>
+                  </div>
+                  <Gavel className="h-6 w-6 shrink-0 text-stone-400 dark:text-stone-500" />
+                </div>
 
-                    <p className="text-[10px] font-medium text-slate-300">
-                      {currentCase.investigator}
-                    </p>
+                {/* Current status */}
+                <div className="mt-5 border border-stone-200 p-3.5 dark:border-stone-800">
+                  <div className="flex items-center justify-between">
+                    <span className="font-mono text-xs uppercase tracking-[0.15em] text-stone-500 dark:text-stone-400">
+                      Current status
+                    </span>
+                    <span className="flex items-center gap-1.5 font-mono text-xs font-semibold text-lime-700 dark:text-lime-300">
+                      <span className="h-1.5 w-1.5 animate-pulse bg-lime-700 dark:bg-lime-300" />
+                      {currentCase.status}
+                    </span>
+                  </div>
+
+                  <div className="mt-3 h-1 overflow-hidden bg-stone-200 dark:bg-stone-800">
+                    <motion.div
+                      animate={{
+                        width: `${((timelineIndex + 1) / timeline.length) * 100}%`,
+                      }}
+                      transition={{ duration: 0.5 }}
+                      className="h-full bg-lime-700 dark:bg-lime-300"
+                    />
                   </div>
                 </div>
 
-                <span className="text-[9px] text-slate-600">
-                  Active case
-                </span>
+                {/* Stats */}
+                <div className="mt-3 grid grid-cols-3 divide-x divide-stone-200 border border-stone-200 dark:divide-stone-800 dark:border-stone-800">
+                  <CaseStat icon={<Fingerprint />} value={currentCase.evidence} label="Evidence" />
+                  <CaseStat icon={<UserRound />} value={currentCase.persons} label="Persons" />
+                  <CaseStat icon={<ClipboardList />} value={currentCase.statements} label="Statements" />
+                </div>
+
+                {/* Investigator */}
+                <div className="mt-3 flex items-center justify-between border border-stone-200 px-3.5 py-3 dark:border-stone-800">
+                  <div className="flex items-center gap-2.5">
+                    <UserRound className="h-4 w-4 text-stone-500 dark:text-stone-400" />
+                    <div>
+                      <p className="font-mono text-xs text-stone-500 dark:text-stone-400">
+                        Assigned investigator
+                      </p>
+                      <p className="font-mono text-sm text-stone-900 dark:text-stone-100">
+                        {currentCase.investigator}
+                      </p>
+                    </div>
+                  </div>
+                  <span className="font-mono text-xs uppercase tracking-[0.15em] text-stone-500 dark:text-stone-400">
+                    Active
+                  </span>
+                </div>
               </div>
-            </div>
-          </motion.div>
-        </AnimatePresence>
+            </motion.div>
+          </AnimatePresence>
+        </div>
 
-        {/* ================================================================
-            INVESTIGATION TIMELINE
-        ================================================================= */}
-
-        <div className="rounded-2xl border border-slate-800 bg-slate-900/60 p-4 sm:p-5">
+        {/* Investigation timeline */}
+        <div className="px-5 py-4">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-xs font-semibold text-white">
-                Investigation timeline
+              <p className="font-mono text-sm font-semibold uppercase tracking-[0.15em] text-stone-900 dark:text-stone-100">
+                Timeline
               </p>
-
-              <p className="mt-0.5 text-[10px] text-slate-600">
+              <p className="mt-1 font-mono text-xs text-stone-500 dark:text-stone-400">
                 Complete case audit trail
               </p>
             </div>
-
-            <FileSearch className="h-4 w-4 text-slate-600" />
+            <FileSearch className="h-4 w-4 text-stone-400 dark:text-stone-500" />
           </div>
 
-          {/* Timeline */}
-          <div className="relative mt-6">
-            {/* Background line */}
-            <div className="absolute left-[14px] top-3 h-[calc(100%-24px)] w-px bg-slate-800" />
-
-            {/* Animated progress line */}
+          <div className="relative mt-5">
+            <div className="absolute left-[13px] top-3 h-[calc(100%-24px)] w-px bg-stone-200 dark:bg-stone-800" />
             <motion.div
-              className="absolute left-[14px] top-3 w-px origin-top bg-blue-500"
-              animate={{
-                height: `${
-                  (timelineIndex / (timeline.length - 1)) * 100
-                }%`,
-              }}
+              className="absolute left-[13px] top-3 w-px origin-top bg-lime-700 dark:bg-lime-300"
+              animate={{ height: `${(timelineIndex / (timeline.length - 1)) * 100}%` }}
               transition={{ duration: 0.5 }}
             />
 
-            <div className="space-y-5">
+            <div className="space-y-4">
               {timeline.map((event, index) => {
                 const Icon = event.icon;
                 const complete = index <= timelineIndex;
@@ -313,23 +239,16 @@ export default function EoccurrenceVisual() {
                 return (
                   <motion.div
                     key={event.label}
-                    animate={{
-                      opacity: complete ? 1 : 0.3,
-                    }}
+                    animate={{ opacity: complete ? 1 : 0.35 }}
                     className="relative flex items-center gap-3"
                   >
                     <motion.div
-                      animate={{
-                        scale: active ? [1, 1.12, 1] : 1,
-                      }}
-                      transition={{
-                        duration: 0.8,
-                        repeat: active ? Infinity : 0,
-                      }}
-                      className={`relative z-10 flex h-7 w-7 shrink-0 items-center justify-center rounded-full border ${
+                      animate={{ scale: active ? [1, 1.1, 1] : 1 }}
+                      transition={{ duration: 0.8, repeat: active ? Infinity : 0 }}
+                      className={`relative z-10 flex h-7 w-7 shrink-0 items-center justify-center border ${
                         complete
-                          ? "border-blue-500/30 bg-blue-500/10 text-blue-400"
-                          : "border-slate-800 bg-[#080c14] text-slate-700"
+                          ? "border-lime-700/40 bg-lime-700/10 text-lime-700 dark:border-lime-300/40 dark:bg-lime-300/10 dark:text-lime-300"
+                          : "border-stone-200 bg-white text-stone-400 dark:border-stone-800 dark:bg-stone-900 dark:text-stone-600"
                       }`}
                     >
                       {complete && index === timeline.length - 1 ? (
@@ -340,11 +259,10 @@ export default function EoccurrenceVisual() {
                     </motion.div>
 
                     <div className="flex min-w-0 flex-1 items-center justify-between">
-                      <p className="text-[11px] font-medium text-slate-300">
+                      <p className="font-mono text-sm text-stone-900 dark:text-stone-100">
                         {event.label}
                       </p>
-
-                      <span className="ml-3 font-mono text-[9px] text-slate-600">
+                      <span className="ml-3 font-mono text-xs text-stone-500 dark:text-stone-400">
                         {event.time}
                       </span>
                     </div>
@@ -355,18 +273,17 @@ export default function EoccurrenceVisual() {
           </div>
 
           {/* Case progression */}
-          <div className="mt-7 rounded-xl border border-slate-800 bg-[#080c14] p-3">
+          <div className="mt-5 border border-stone-200 p-3 dark:border-stone-800">
             <div className="flex items-center justify-between">
-              <span className="text-[9px] uppercase tracking-widest text-slate-600">
+              <span className="font-mono text-xs uppercase tracking-[0.15em] text-stone-500 dark:text-stone-400">
                 Case progression
               </span>
-
-              <span className="font-mono text-[9px] text-blue-400">
+              <span className="font-mono text-xs text-lime-700 dark:text-lime-300">
                 {timelineIndex + 1}/{timeline.length}
               </span>
             </div>
 
-            <div className="mt-3 flex items-center gap-1.5">
+            <div className="mt-3 flex items-center gap-1">
               {timeline.map((_, index) => (
                 <motion.div
                   key={index}
@@ -374,14 +291,13 @@ export default function EoccurrenceVisual() {
                     opacity: index <= timelineIndex ? 1 : 0.2,
                     scale: index === timelineIndex ? 1.05 : 1,
                   }}
-                  className="h-1.5 flex-1 rounded-full bg-blue-500"
+                  className="h-1 flex-1 bg-lime-700 dark:bg-lime-300"
                 />
               ))}
             </div>
           </div>
 
-          {/* Details link */}
-          <div className="mt-4 flex items-center justify-end gap-1 text-[9px] text-slate-600">
+          <div className="mt-4 flex items-center justify-end gap-1 font-mono text-xs uppercase tracking-[0.15em] text-stone-500 dark:text-stone-400">
             Case details
             <ArrowRight className="h-3 w-3" />
           </div>
@@ -389,9 +305,8 @@ export default function EoccurrenceVisual() {
       </div>
 
       {/* Footer */}
-      <div className="relative mt-5 flex items-center justify-center gap-2 text-[10px] text-slate-600">
-        <span className="h-1.5 w-1.5 rounded-full bg-blue-500" />
-
+      <div className="flex items-center justify-center gap-2 border-t border-stone-200 px-5 py-3 font-mono text-xs uppercase tracking-[0.15em] text-stone-500 dark:border-stone-800 dark:text-stone-400">
+        <span className="h-1.5 w-1.5 bg-lime-700 dark:bg-lime-300" />
         Secure case records · Evidence · Investigation history
       </div>
     </div>
@@ -408,16 +323,14 @@ function CaseStat({
   label: string;
 }) {
   return (
-    <div className="rounded-xl border border-slate-800 bg-[#080c14] p-3">
-      <div className="flex items-center gap-2 text-slate-600">
-        <span className="h-3.5 w-3.5 [&>svg]:h-full [&>svg]:w-full">
-          {icon}
-        </span>
-
-        <span className="truncate text-[9px]">{label}</span>
+    <div className="p-3">
+      <div className="flex items-center gap-2 text-stone-500 dark:text-stone-400">
+        <span className="h-3.5 w-3.5 [&>svg]:h-full [&>svg]:w-full">{icon}</span>
+        <span className="truncate font-mono text-xs">{label}</span>
       </div>
-
-      <p className="mt-2 text-lg font-bold text-white">{value}</p>
+      <p className="mt-2 font-mono text-lg font-semibold text-stone-900 dark:text-stone-100">
+        {value}
+      </p>
     </div>
   );
 }

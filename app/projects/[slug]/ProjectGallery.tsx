@@ -18,10 +18,7 @@ type ProjectGalleryProps = {
   title: string;
 };
 
-export default function ProjectGallery({
-  screenshots,
-  title,
-}: ProjectGalleryProps) {
+export default function ProjectGallery({ screenshots, title }: ProjectGalleryProps) {
   const imageModal = useImageModal();
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -31,32 +28,27 @@ export default function ProjectGallery({
 
   const previous = () => {
     setCurrentIndex((current) =>
-      current === 0 ? screenshots.length - 1 : current - 1
+      current === 0 ? screenshots.length - 1 : current - 1,
     );
   };
 
   const next = () => {
     setCurrentIndex((current) =>
-      current === screenshots.length - 1 ? 0 : current + 1
+      current === screenshots.length - 1 ? 0 : current + 1,
     );
   };
 
   const openCurrent = () => {
-    imageModal.open(
-      screenshots,
-      currentIndex
-    );
+    imageModal.open(screenshots, currentIndex);
   };
 
   return (
     <>
-      {/* Main Screenshot */}
-      <div
-        className="group relative overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-xl shadow-slate-900/5 dark:border-slate-800 dark:bg-slate-900 dark:shadow-black/20"
-      >
+      {/* Main screenshot */}
+      <div className="group relative overflow-hidden border border-stone-200 bg-white dark:border-stone-800 dark:bg-stone-900">
         <div
           onClick={openCurrent}
-          className="relative block aspect-video w-full overflow-hidden bg-slate-100 dark:bg-slate-800"
+          className="relative block aspect-video w-full cursor-pointer overflow-hidden bg-stone-100 dark:bg-stone-800"
         >
           <Image
             src={currentScreenshot.src}
@@ -65,7 +57,7 @@ export default function ProjectGallery({
             fill
             sizes="(max-width: 768px) 100vw, 1200px"
             priority
-            className="object-contain transition-transform duration-700 group-hover:scale-[1.01]"
+            className="object-contain"
           />
         </div>
 
@@ -75,7 +67,7 @@ export default function ProjectGallery({
             type="button"
             onClick={previous}
             aria-label="Previous screenshot"
-            className="absolute left-4 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-slate-900/70 text-white opacity-0 shadow-lg backdrop-blur-sm transition-all duration-300 hover:bg-slate-900 group-hover:opacity-100"
+            className="absolute left-4 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center border border-stone-700 bg-stone-950/85 text-stone-100 transition-colors hover:border-lime-300 hover:text-lime-300"
           >
             <ChevronLeft className="h-5 w-5" />
           </button>
@@ -87,7 +79,7 @@ export default function ProjectGallery({
             type="button"
             onClick={next}
             aria-label="Next screenshot"
-            className="absolute right-4 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-slate-900/70 text-white opacity-0 shadow-lg backdrop-blur-sm transition-all duration-300 hover:bg-slate-900 group-hover:opacity-100"
+            className="absolute right-4 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center border border-stone-700 bg-stone-950/85 text-stone-100 transition-colors hover:border-lime-300 hover:text-lime-300"
           >
             <ChevronRight className="h-5 w-5" />
           </button>
@@ -95,36 +87,55 @@ export default function ProjectGallery({
 
         {/* Counter */}
         {screenshots.length > 1 && (
-          <div className="pointer-events-none absolute bottom-4 left-1/2 -translate-x-1/2 rounded-full border border-white/20 bg-slate-900/70 px-3 py-1 text-xs font-medium text-white shadow-lg backdrop-blur-sm">
-            {currentIndex + 1} / {screenshots.length}
+          <div className="pointer-events-none absolute bottom-4 left-1/2 -translate-x-1/2 border border-stone-700 bg-stone-950/85 px-2.5 py-1 font-mono text-xs uppercase tracking-[0.15em] text-stone-100">
+            {String(currentIndex + 1).padStart(2, "0")} /{" "}
+            {String(screenshots.length).padStart(2, "0")}
           </div>
         )}
       </div>
 
-      {/* Thumbnail Grid */}
+      {/* Caption */}
+      <div className="mt-4 flex flex-col justify-between gap-2 sm:flex-row sm:items-baseline">
+        <div>
+          <p className="font-mono text-sm uppercase tracking-[0.15em] text-stone-900 dark:text-stone-100">
+            {currentScreenshot.title}
+          </p>
+          <p className="mt-1.5 max-w-2xl text-sm leading-relaxed text-stone-500 dark:text-stone-400">
+            {currentScreenshot.description}
+          </p>
+        </div>
+        <button
+          onClick={openCurrent}
+          className="shrink-0 text-[11px] uppercase tracking-[0.2em] text-stone-500 transition-colors hover:text-lime-700 dark:text-stone-400 dark:hover:text-lime-300"
+        >
+          View full size ↗
+        </button>
+      </div>
+
+      {/* Thumbnails */}
       <StaggerContainer>
         {screenshots.length > 1 && (
           <>
-            <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-4">
+            <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4">
               {screenshots.slice(0, 8).map((screenshot, index) => (
                 <StaggerItem key={screenshot.src}>
                   <button
                     type="button"
                     onClick={() => setCurrentIndex(index)}
-                    className={`group relative block w-full overflow-hidden rounded-xl border transition-all duration-300 ${
+                    className={`group relative block w-full overflow-hidden border transition-colors ${
                       currentIndex === index
-                        ? "border-blue-500 ring-2 ring-blue-500/20"
-                        : "border-slate-200 hover:border-slate-300 dark:border-slate-800 dark:hover:border-slate-700"
+                        ? "border-lime-700 dark:border-lime-300"
+                        : "border-stone-200 hover:border-stone-400 dark:border-stone-800 dark:hover:border-stone-600"
                     }`}
                   >
-                    <div className="relative aspect-video bg-slate-100 dark:bg-slate-800">
+                    <div className="relative aspect-video bg-stone-100 dark:bg-stone-800">
                       <Image
                         src={screenshot.src}
                         alt={screenshot.alt}
                         fill
                         sizes="(max-width: 640px) 50vw, 25vw"
                         loading="lazy"
-                        className="object-cover object-top transition-transform duration-300 group-hover:scale-105"
+                        className="object-cover object-top"
                       />
                     </div>
                   </button>
@@ -140,10 +151,10 @@ export default function ProjectGallery({
                     setCurrentIndex(0);
                     imageModal.open(screenshots, 0);
                   }}
-                  className="rounded-full border border-slate-200 bg-white px-5 py-2.5 text-sm font-semibold text-slate-700 shadow-sm transition-all hover:-translate-y-0.5 hover:border-blue-200 hover:text-blue-600 hover:shadow-md dark:border-slate-800 dark:bg-slate-900 dark:text-slate-300 dark:hover:border-blue-900 dark:hover:text-blue-400"
+                  className="inline-flex items-center gap-2 border border-stone-200 px-5 py-2.5 text-[11px] font-semibold uppercase tracking-[0.2em] text-stone-900 transition-colors hover:border-lime-700 hover:text-lime-700 dark:border-stone-800 dark:text-stone-100 dark:hover:border-lime-300 dark:hover:text-lime-300"
                 >
-                  View All Screenshots
-                  <span className="ml-1 text-slate-400">
+                  View all screenshots
+                  <span className="text-stone-500 dark:text-stone-400">
                     ({screenshots.length})
                   </span>
                 </button>

@@ -11,33 +11,33 @@ const CvModal = () => {
     <a
       href={modal.cvUrl || ""}
       download={modal.fileName || "cv.pdf"}
-      className="inline-flex items-center gap-2 rounded-sm bg-blue-600 px-4 py-2 text-xs font-semibold text-white shadow-sm transition-all hover:bg-blue-500 hover:shadow-md"
+      className="group inline-flex items-center gap-2 border border-lime-700 bg-lime-700 px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.2em] text-stone-50 transition-colors hover:bg-transparent hover:text-lime-700 dark:border-lime-300 dark:bg-lime-300 dark:text-black dark:hover:bg-transparent dark:hover:text-lime-300"
     >
-      <Download className="h-4 w-4" />
+      <Download className="h-3.5 w-3.5" />
       <span>Download CV</span>
     </a>
   );
 
   const content = (
-    <div className="flex flex-col items-center justify-center gap-4">
+    <div className="w-full">
       <iframe
         src={modal.cvUrl || ""}
         title={modal.fileName || "Curriculum Vitae"}
-        className="h-[75vh] w-full rounded-md border border-slate-300 shadow-md dark:border-slate-700"
-      ></iframe>
+        className="h-[75vh] w-full border border-stone-200 dark:border-stone-800"
+      />
     </div>
   );
 
   return (
-    <Modal 
-      isOpen={modal.isOpen} 
-      close={modal.close} 
+    <Modal
+      isOpen={modal.isOpen}
+      close={modal.close}
       label={modal.fileName || "Curriculum Vitae"}
       headerAction={headerAction}
       content={content}
-      maxWidth="4xl"
+      maxWidth="max-w-4xl"
     />
   );
-}
+};
 
-export default CvModal
+export default CvModal;

@@ -4,25 +4,30 @@ import { TypeAnimation } from "react-type-animation";
 
 const Typewriter = () => {
   return (
-    <TypeAnimation
+    <span className="inline-flex items-baseline gap-1">
+      <TypeAnimation
         sequence={[
-            "Full-Stack Developer.",
-            2000,
-            "Django & Next.js Developer.",
-            2000,
-            "Backend & API Developer.",
-            2000,
-            "Building Modern Web Applications.",
-            2000,
-            "Turning Ideas Into Software.",
-            2000,
+          "Full-stack developer.",
+          2000,
+          "Django & Next.js developer.",
+          2000,
+          "Backend & API developer.",
+          2000,
+          "I build systems that stay up.",
+          2000,
         ]}
         wrapper="span"
-        speed={50}
+        speed={55}
+        deletionSpeed={75}
         repeat={Infinity}
-        deletionSpeed={70}
-    />
+        cursor={false}
+      />
+      <span
+        aria-hidden="true"
+        className="inline-block h-[1em] w-[0.5ch] animate-pulse bg-stone-500 dark:bg-stone-400"
+      />
+    </span>
   );
-}
+};
 
 export default Typewriter;

@@ -1,340 +1,302 @@
 "use client";
 
 import FadeIn, { StaggerContainer, StaggerItem } from "./components/Animations";
-import CodeShowcase from "./components/CodeShowCase";
-import HeroSection from "./components/HeroSection";
+import CodeShowcase from "./components/visuals/CodeShowCase";
 import Typewriter from "./components/Typewriter";
-import { Phone, ArrowUpRight, Monitor, Server, Container } from "lucide-react";
+import { Phone, ArrowUpRight, ArrowDown, Dot, ArrowRight } from "lucide-react";
 import { GithubIcon, GmailIcon, LinkedinIcon, WhatsappIcon } from "./components/icons/Icons";
 import Link from "next/link";
-import projects from "./projects/data/projects";
+import { projects, smallProjects } from "./projects/data/projects";
 
 const Home = () => {
-  const aboutMe = [
-    {
-      title: "Backend Systems",
-      icon: Server,
-      description:
-        "Building REST APIs, real-time services, authentication systems, and database-driven applications with Django, PostgreSQL, Redis, JWT Auth, and WebSockets.",
-    },
-    {
-      title: "Frontend Engineering",
-      icon: Monitor,
-      description:
-        "Creating responsive, component-driven interfaces with Next.js, React, TypeScript, and Tailwind CSS, with a focus on usability and clean interactions.",
-    },
-    {
-      title: "DevOps & Infrastructure",
-      icon: Container,
-      description:
-        "Containerizing applications with Docker, configuring Nginx reverse proxies, managing Linux environments, and connecting multi-service systems.",
-    },
+  const stack = [
+    { label: "Backend", items: ["Django", "PostgreSQL", "Redis", "JWT Auth", "WebSockets"] },
+    { label: "Frontend", items: ["Next.js", "React", "TypeScript", "Tailwind"] },
+    { label: "Infra", items: ["Docker", "Nginx", "Linux", "Multi-service systems"] },
   ];
 
   const message = encodeURIComponent(
     "Hi Daniel, I came across your portfolio and would like to get in touch regarding an opportunity. Could we discuss further?"
   );
+
   const contactMethods = [
-    {
-      name: "Email",
-      description: "dangitau9824@gmail.com",
-      href: "mailto:dangitau9824@gmail.com",
-      icon: GmailIcon,
-      iconClass: "bg-red-100 text-red-600 dark:bg-red-950 dark:text-red-400",
-    },
-    {
-      name: "Phone",
-      description: "+254 703 509 598",
-      href: "tel:+254703509598",
-      icon: Phone,
-      iconClass: "bg-blue-100 text-blue-600 dark:bg-blue-950 dark:text-blue-400",
-    },
-    {
-      name: "WhatsApp",
-      description: "Chat with me",
-      href: `https://wa.me/254703509598?text=${message}`,
-      icon: WhatsappIcon,
-      iconClass: "bg-green-100 text-green-600 dark:bg-green-950 dark:text-green-400",
-      external: true,
-    },
-    {
-      name: "LinkedIn",
-      description: "Let's connect",
-      href: "http://www.linkedin.com/in/daniel-g-76ab1b246",
-      icon: LinkedinIcon,
-      iconClass: "bg-blue-100 text-blue-600 dark:bg-blue-950 dark:text-blue-400",
-      external: true,
-    },
-    {
-      name: "GitHub",
-      description: "Check out my projects",
-      href: "https://github.com/dannyduke77",
-      icon: GithubIcon,
-      iconClass: "bg-slate-100 text-slate-600 dark:bg-slate-950 dark:text-slate-400",
-      external: true,
-    },
+    { name: "Email", description: "dangitau9824@gmail.com", href: "mailto:dangitau9824@gmail.com", icon: GmailIcon },
+    { name: "Phone", description: "+254 703 509 598", href: "tel:+254703509598", icon: Phone },
+    { name: "WhatsApp", description: "Chat with me", href: `https://wa.me/254703509598?text=${message}`, icon: WhatsappIcon, external: true },
+    { name: "LinkedIn", description: "Let's connect", href: "http://www.linkedin.com/in/daniel-g-76ab1b246", icon: LinkedinIcon, external: true },
+    { name: "GitHub", description: "Check out my projects", href: "https://github.com/dannyduke77", icon: GithubIcon, external: true },
   ];
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 antialiased dark:bg-slate-950 dark:text-slate-100">
-
-      {/* Hero Section */}
-      <section
-        id="home"
-        className="mx-auto flex min-h-screen max-w-[1920px] items-center px-6 pt-20"
-      >
-        <div className="grid w-full items-center gap-16 lg:grid-cols-[1.05fr_0.95fr]">
-
-          {/* Left — Introduction */}
-          <FadeIn className="space-y-6">
-            <div className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50/50 px-3 py-1 text-sm font-semibold text-blue-700 dark:border-blue-900/50 dark:bg-blue-950/50 dark:text-blue-300">
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-blue-400 opacity-75" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-blue-500" />
-              </span>
-              Available for new projects
-            </div>
-
-            <h1 className="text-4xl font-bold tracking-tight sm:text-6xl sm:leading-tight">
-              <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent dark:from-blue-400 dark:to-indigo-400">
-                <Typewriter />
-              </span>
+    <div className="min-h-screen bg-stone-50 font-mono text-stone-900 antialiased dark:bg-stone-950 dark:text-stone-100">
+      {/* HERO */}
+      <section id="home" className="relative mx-auto flex min-h-screen max-w-[1440px] flex-col justify-center px-6 md:px-10">
+  
+        <div className="grid gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:gap-8">
+          <div>
+            <h1 className="text-4xl leading-[1.05] font-semibold tracking-tight text-stone-900 dark:text-white sm:text-6xl md:text-7xl">
+              Daniel Gitau.
+              <br />
+              <span className="text-stone-500 dark:text-stone-400">I build systems</span>
+              <br />
+              <span className="text-stone-500 dark:text-stone-400">that stay up.</span>
             </h1>
-
-            <p className="max-w-2xl text-lg leading-relaxed text-slate-600 dark:text-slate-400 sm:text-xl">
-              Hi, I'm{" "}
-              <span className="font-semibold text-slate-900 dark:text-white">
-                Daniel Gitau
-              </span>
-              . I build modern web applications, from intuitive frontend
-              experiences to reliable backend systems and real-time services.
+            <div className="mt-8 max-w-xl border-l border-stone-200 pl-5 text-base leading-relaxed text-stone-500 dark:border-stone-800 dark:text-stone-400">
+              <Typewriter />
+            </div>
+            <p className="mt-6 max-w-xl text-sm leading-relaxed text-stone-500 dark:text-stone-400">
+              Business Information Technology graduate. I work across the stack with a focus on backend architecture, APIs, databases, and real-time services — then wire the frontend, containerize the lot, and keep it running.
             </p>
-
-            <HeroSection />
-          </FadeIn>
-
-          {/* Right — Code */}
-          <FadeIn delay={0.2} className="hidden lg:block">
+            <div className="mt-10 flex flex-wrap items-center gap-3">
+              <Link href="#projects" className="group inline-flex items-center gap-2 border border-lime-700 bg-lime-700 px-5 py-2.5 text-sm font-semibold text-stone-50 transition-colors hover:bg-transparent hover:text-lime-700 dark:border-lime-300 dark:bg-lime-300 dark:text-black dark:hover:bg-transparent dark:hover:text-lime-300">
+                View Projects
+                <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+              </Link>
+              <Link href="#contact" className="inline-flex items-center gap-2 border border-stone-200 px-5 py-2.5 text-sm font-semibold text-stone-900 transition-colors hover:border-stone-500 hover:text-lime-700 dark:border-stone-800 dark:text-stone-100 dark:hover:border-stone-500 dark:hover:text-lime-300">
+                Get In Touch
+              </Link>
+            </div>
+          </div>
+          <div className="hidden lg:block">
             <CodeShowcase />
-          </FadeIn>
+          </div>
+        </div>
 
+        <div className="absolute bottom-6 left-6 right-6 flex items-center justify-between text-xs uppercase tracking-[0.2em] text-stone-400 dark:text-stone-500 md:left-10 md:right-10">
+          <span className="flex items-center gap-2">
+            <ArrowDown className="h-4 w-4" />
+            scroll
+          </span>
         </div>
       </section>
 
-      {/* About Section */}
-      <section
-        id="about"
-        className="border-t border-slate-200/60 bg-white py-24 dark:border-slate-800/60 dark:bg-slate-900/50"
-      >
-        <div className="mx-auto max-w-7xl px-6">
-          <FadeIn className="max-w-2xl space-y-4">
-            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+      {/* ABOUT */}
+      <section id="about" className="border-t border-stone-200 py-24 dark:border-stone-800 md:py-32">
+        <div className="mx-auto max-w-[1440px] px-6 md:px-10">
+          <FadeIn>
+            <h2 className="text-4xl font-semibold tracking-tight text-stone-900 dark:text-white sm:text-5xl">
               About Me
             </h2>
-            <p className="text-base leading-relaxed text-slate-600 dark:text-slate-400 sm:text-lg">
-              I'm a Business Information Technology graduate who enjoys building software that solves real problems. I work across the stack, with a particular interest in backend architecture, APIs, databases, and real-time systems.
-            </p>
           </FadeIn>
-
-          <StaggerContainer className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
-            {aboutMe.map((item, idx) => {
-              const Icon = item.icon;
-
-              return (
-                <StaggerItem key={idx}>
-                  <div
-                    key={idx}
-                    className="group rounded-2xl border border-slate-200/80 bg-slate-50/50 p-6 transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:bg-blue-50/30 hover:shadow-lg hover:shadow-blue-500/5 dark:border-slate-800 dark:bg-slate-950/50 dark:hover:border-blue-900/60 dark:hover:bg-blue-950/10"
-                  >
-                    <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-xl bg-blue-100 text-blue-600 transition-transform duration-300 group-hover:scale-110 dark:bg-blue-950 dark:text-blue-400">
-                      <Icon className="h-5 w-5" />
+          <div className="mt-12 grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
+            <FadeIn>
+              <p className="text-base leading-relaxed text-stone-500 dark:text-stone-400">
+                I'm a Business Information Technology graduate who enjoys building software that solves real problems. I work across the stack, with a particular interest in backend architecture, APIs, databases, and real-time systems.
+              </p>
+              <p className="mt-4 text-base leading-relaxed text-stone-500 dark:text-stone-400">
+                I'm a self-directed developer interested in building practical software and tackling technical challenges across the stack.
+              </p>
+            </FadeIn>
+            <FadeIn delay={0.1}>
+              <div className="divide-y divide-stone-200 border-y border-stone-200 dark:divide-stone-800 dark:border-stone-800">
+                {stack.map((group) => (
+                  <div key={group.label} className="grid grid-cols-[110px_1fr] gap-4 py-5">
+                    <span className="text-xs uppercase tracking-[0.2em] text-stone-500 dark:text-stone-400">{group.label}</span>
+                    <div className="flex flex-wrap gap-x-4 gap-y-1.5">
+                      {group.items.map((item) => (
+                        <span key={item} className="text-sm text-stone-900 dark:text-stone-100">{item}</span>
+                      ))}
                     </div>
-
-                    <h3 className="text-lg font-semibold text-slate-900 dark:text-white">
-                      {item.title}
-                    </h3>
-
-                    <p className="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
-                      {item.description}
-                    </p>
                   </div>
-                </StaggerItem>
-              );
-            })}
-          </StaggerContainer>
+                ))}
+              </div>
+            </FadeIn>
+          </div>
         </div>
       </section>
 
-      {/* Projects Section */}
-      <section id="projects" className="py-24">
-        <div className="mx-auto max-w-7xl px-6">
+            {/* PROJECTS */}
+      <section id="projects" className="border-t border-stone-200 py-24 dark:border-stone-800 md:py-32">
+        <div className="mx-auto max-w-[1440px] px-6 md:px-10">
           <FadeIn>
             <div className="flex flex-col justify-between gap-4 md:flex-row md:items-end">
-              <div>
-                <p className="mb-2 text-sm font-semibold uppercase tracking-wider text-blue-600 dark:text-blue-400">
-                  Selected Work
-                </p>
-
-                <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-                  Featured Projects
-                </h2>
-
-                <p className="mt-3 max-w-2xl text-slate-600 dark:text-slate-400">
-                  A few projects I've built to solve real-world problems. More on <a href="https://github.com/dannyduke77" className="text-blue-400 hover:text-blue-500" target="_blank"><GithubIcon className="h-4 w-4 inline" /> GitHub</a>.
-                </p>
-              </div>
+              <h2 className="text-4xl font-semibold tracking-tight text-stone-900 dark:text-white sm:text-5xl">
+                Projects
+              </h2>
+              <a
+                href="https://github.com/dannyduke77"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex shrink-0 items-center gap-2 text-[11px] uppercase tracking-[0.2em] text-stone-500 transition-colors hover:text-lime-700 dark:text-stone-400 dark:hover:text-lime-300"
+              >
+                <GithubIcon className="h-3.5 w-3.5" />
+                More on GitHub ↗
+              </a>
             </div>
           </FadeIn>
 
+          {/* Featured projects */}
           <StaggerContainer>
-            <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <div className={`mt-12 grid gap-5 sm:grid-cols-2`}>
               {projects.map((project, idx) => (
                 <StaggerItem key={project.title}>
-                  <div
-                    key={project.title}
-                    className="group h-full flex flex-col justify-between rounded-2xl border border-slate-200/80 bg-white p-6 shadow-sm transition-all hover:border-blue-200 hover:shadow-lg dark:border-slate-800 dark:bg-slate-900 dark:hover:border-blue-900/60"
+                  <Link
+                    href={`/projects/${project.slug}`}
+                    scroll={true}
+                    className="group flex h-full flex-col justify-between border border-stone-200 bg-white p-7 transition-all duration-300 hover:-translate-y-1 hover:border-lime-700/60 hover:shadow-[0_20px_40px_-20px_rgba(0,0,0,0.15)] dark:border-stone-800 dark:bg-stone-900 dark:hover:border-lime-300/60 dark:hover:shadow-[0_20px_40px_-20px_rgba(0,0,0,0.8)]"
                   >
                     <div>
-                      {/* Project Number */}
-                      <div className="mb-8 flex items-center justify-between">
-                        <span className="text-sm font-bold tracking-widest text-blue-600 dark:text-blue-400">
+                      <div className="flex items-center justify-between">
+                        <span className="text-[11px] uppercase tracking-[0.2em] text-stone-500 transition-colors group-hover:text-lime-700 dark:text-stone-400 dark:group-hover:text-lime-300">
                           {String(idx + 1).padStart(2, "0")}
                         </span>
-
-                        <span className="h-px flex-1 bg-slate-200 ml-4 dark:bg-slate-800" />
+                        <span className="flex h-8 w-8 items-center justify-center border border-stone-200 text-stone-500 transition-all duration-300 group-hover:border-lime-700 group-hover:bg-lime-700 group-hover:text-stone-50 dark:border-stone-800 dark:text-stone-400 dark:group-hover:border-lime-300 dark:group-hover:bg-lime-300 dark:group-hover:text-black">
+                          <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                        </span>
                       </div>
 
-                      <h3 className="text-xl font-bold text-slate-900 dark:text-white">
+                      <h3 className="mt-8 text-xl font-semibold tracking-tight text-stone-900 dark:text-white md:text-2xl">
                         {project.title}
                       </h3>
-
-                      <p className="mt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+                      <p className="mt-3 text-sm leading-relaxed text-stone-500 dark:text-stone-400">
                         {project.shortDescription}
                       </p>
                     </div>
 
                     <div className="mt-8">
-                      {/* Tech Stack */}
-                      <div className="flex flex-wrap gap-1.5">
+                      <div className="flex flex-wrap gap-x-3 gap-y-1.5">
                         {project.stack.map((tag) => (
-                          <span
-                            key={tag}
-                            className="rounded-md bg-slate-100 px-2.5 py-1 text-xs font-medium text-slate-600 dark:bg-slate-800 dark:text-slate-300"
-                          >
+                          <span key={tag} className="text-[11px] uppercase tracking-[0.15em] text-stone-500 dark:text-stone-400">
                             {tag}
                           </span>
                         ))}
                       </div>
 
-                      {/* Links */}
-                      <div className="mt-6 flex items-center gap-8 border-t border-slate-100 pt-4 dark:border-slate-800">
-                        <a
-                          href={project.github}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-xs font-semibold text-slate-700 transition-colors hover:text-blue-600 dark:text-slate-300 dark:hover:text-blue-400"
-                        >
-                          Source Code <ArrowUpRight className="ml-1 inline-block h-3 w-3" />
-                        </a>
-
-                        <Link
-                          href={`/projects/${project.slug}`}
-                          scroll={true}
-                          onClick={() => {
-                            window.scrollTo(0, 0);
-                          }}
-                        >
-                          <span className="text-xs font-semibold text-blue-600 transition-colors hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300">
-                            View Project <ArrowUpRight className="ml-1 inline-block h-3 w-3" />
-                          </span>
-                        </Link>
-
-                        {project.demo !== "#" && (
-                          <a
-                            href={project.demo}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-xs font-semibold text-blue-600 transition-colors hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
-                          >
-                            Live Demo <ArrowUpRight className="ml-1 inline-block h-3 w-3" />
-                          </a>
-                        )}
+                      <div className="mt-5 flex items-center justify-between border-t border-stone-200 pt-4 transition-colors group-hover:border-lime-700/30 dark:border-stone-800 dark:group-hover:border-lime-300/30">
+                        <span className="text-[11px] uppercase tracking-[0.2em] text-stone-500 transition-colors group-hover:text-lime-700 dark:text-stone-400 dark:group-hover:text-lime-300">
+                          View Project
+                        </span>
+                        <span className="text-[11px] uppercase tracking-[0.2em] text-stone-400 transition-all duration-300 group-hover:translate-x-1 group-hover:text-lime-700 dark:text-stone-500 dark:group-hover:text-lime-300">
+                          →
+                        </span>
                       </div>
                     </div>
-                  </div>
+                  </Link>
                 </StaggerItem>
               ))}
             </div>
           </StaggerContainer>
-        </div>
-      </section>
 
-      {/* Contact Section */}
-      <section
-        id="contact"
-        className="border-t border-slate-200/60 bg-white py-24 dark:border-slate-800/60 dark:bg-slate-900/50"
-      >
-        <div className="mx-auto max-w-7xl px-6 text-center">
-          <FadeIn className="mx-auto max-w-3xl space-y-5">
-            <p className="text-sm font-semibold uppercase tracking-wider text-blue-600 dark:text-blue-400">
-              Get In Touch
-            </p>
+          {/* Small projects */}
+          <FadeIn delay={0.1}>
+            <div className="mt-16">
+              <div className="flex items-baseline justify-between gap-4">
+                <h3 className="text-[11px] uppercase tracking-[0.25em] text-stone-500 dark:text-stone-400">
+                  More projects
+                </h3>
+                <span className="text-[11px] uppercase tracking-[0.2em] text-stone-500 dark:text-stone-400">
+                  {smallProjects.length} on GitHub
+                </span>
+              </div>
 
-            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-              Let's Work Together
-            </h2>
+              <StaggerContainer>
+                <div className="mt-4 border-t border-stone-200 dark:border-stone-800">
+                  {smallProjects.map((project) => (
+                    <StaggerItem key={project.title}>
+                      <a
+                        href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group grid grid-cols-1 gap-2 border-b border-stone-200 py-5 px-4 transition-colors hover:bg-white dark:border-stone-800 dark:hover:bg-stone-900 md:grid-cols-[1fr_1.4fr_auto] md:items-center md:gap-6"
+                      >
+                        <div>
+                          <h4 className="text-base font-semibold text-stone-900 dark:text-white">
+                            {project.title}
+                          </h4>
+                          <div className="mt-1 flex flex-wrap gap-x-3 gap-y-1">
+                            {project.stack.map((tag) => (
+                              <span key={tag} className="text-[11px] uppercase tracking-[0.15em] text-stone-500 dark:text-stone-400">
+                                {tag}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
 
-            <p className="mx-auto max-w-xl text-base leading-relaxed text-slate-600 dark:text-slate-400 sm:text-lg">
-              Have a project in mind or looking for a developer? I'd love to hear about it.
-            </p>
+                        <p className="text-sm leading-relaxed text-stone-500 dark:text-stone-400">
+                          {project.description}
+                        </p>
+
+                        <span className="flex items-center gap-1.5 text-[11px] uppercase tracking-[0.2em] text-stone-500 transition-colors group-hover:text-lime-700 dark:text-stone-400 dark:group-hover:text-lime-300">
+                          GitHub
+                          <ArrowUpRight className="h-3 w-3 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                        </span>
+                      </a>
+                    </StaggerItem>
+                  ))}
+                </div>
+              </StaggerContainer>
+            </div>
           </FadeIn>
 
-          <StaggerContainer className="mt-12">
-            <div className="mx-auto grid max-w-4xl grid-cols-1 gap-4 pt-6 sm:grid-cols-2 lg:grid-cols-3">
-              {contactMethods.map((contact) => {
-                const Icon = contact.icon;
-
-                return (
-                  <StaggerItem key={contact.name}>
-                    <a
-                      key={contact.name}
-                      href={contact.href}
-                      target={contact.external ? "_blank" : undefined}
-                      rel={contact.external ? "noopener noreferrer" : undefined}
-                      className="group flex items-center gap-4 rounded-2xl border border-slate-200 bg-slate-50 p-5 text-left transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:bg-blue-50/50 hover:shadow-lg hover:shadow-blue-500/5 dark:border-slate-800 dark:bg-slate-950/50 dark:hover:border-blue-900 dark:hover:bg-blue-950/20"
-                    >
-                      <div
-                        className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl transition-transform duration-300 group-hover:scale-125 ${contact.iconClass}`}
-                      >
-                        <Icon className="h-7 w-7" />
-                      </div>
-
-                      <div className="min-w-0">
-                        <p className="text-sm font-semibold text-slate-900 dark:text-white">
-                          {contact.name}
-                        </p>
-
-                        <p className="mt-0.5 truncate text-[13px] text-slate-500 dark:text-slate-400">
-                          {contact.description}
-                        </p>
-                      </div>
-
-                      <ArrowUpRight className="ml-auto h-4 w-4 shrink-0 text-slate-400 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-blue-500" />
-                    </a>
-                  </StaggerItem>
-                );
-              })}
+          <FadeIn delay={0.15}>
+            <div className="mt-8 flex items-center justify-between text-[11px] uppercase tracking-[0.2em] text-stone-500 dark:text-stone-400">
+              <span>{projects.length + smallProjects.length} projects</span>
+              <Link href="https://github.com/DannyDuke77" target="_blank" className="flex items-center gap-1.5 transition-colors hover:text-lime-700 dark:hover:text-lime-300">
+                <ArrowUpRight className="h-3 w-3" /> Go to GitHub <GithubIcon className="h-6 w-6" />
+              </Link>
             </div>
-          </StaggerContainer>
+          </FadeIn>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="border-t border-slate-200/60 py-8 text-center text-xs text-slate-500 dark:border-slate-800/60 dark:text-slate-400">
-        <p>&copy; {new Date().getFullYear()} Daniel Gitau. All rights reserved.</p>
+      {/* CONTACT */}
+      <section id="contact" className="border-t border-stone-200 py-24 dark:border-stone-800 md:py-32">
+        <div className="mx-auto max-w-[1440px] px-6 md:px-10">
+          <FadeIn>
+            <h2 className="text-4xl font-semibold tracking-tight text-stone-900 dark:text-white sm:text-5xl">
+              Get In Touch
+            </h2>
+          </FadeIn>
+
+          <FadeIn delay={0.05}>
+            <div className="mt-12 grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:gap-16">
+              <div>
+                <a href="mailto:dangitau9824@gmail.com" className="block text-3xl font-semibold tracking-tight text-stone-900 underline-offset-8 hover:text-lime-700 hover:underline dark:text-white dark:hover:text-lime-300 sm:text-5xl">
+                  dangitau9824<wbr />@gmail.com
+                </a>
+                <p className="mt-6 max-w-md text-sm leading-relaxed text-stone-500 dark:text-stone-400">
+                  Have a project in mind or looking for a developer? I'd love to hear about it.
+                </p>
+              </div>
+
+              <StaggerContainer>
+                <div className="border-t border-stone-200 dark:border-stone-800">
+                  {contactMethods.map((contact) => {
+                    const Icon = contact.icon;
+                    return (
+                      <StaggerItem key={contact.name}>
+                        <a
+                          href={contact.href}
+                          target={contact.external ? "_blank" : undefined}
+                          rel={contact.external ? "noopener noreferrer" : undefined}
+                          className="group flex items-center gap-4 border-b border-stone-200 py-4 transition-colors hover:bg-white dark:border-stone-800 dark:hover:bg-stone-950"
+                        >
+                          <Icon className="h-4 w-4 text-stone-500 transition-colors group-hover:text-lime-700 dark:text-stone-400 dark:group-hover:text-lime-300" />
+                          <span className="w-24 text-xs uppercase tracking-[0.2em] text-stone-500 dark:text-stone-400">{contact.name}</span>
+                          <span className="truncate text-sm text-stone-900 group-hover:text-black dark:text-stone-100 dark:group-hover:text-white">{contact.description}</span>
+                          <ArrowUpRight className="ml-auto h-3.5 w-3.5 text-stone-400 transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-lime-700 dark:text-stone-500 dark:group-hover:text-lime-300" />
+                        </a>
+                      </StaggerItem>
+                    );
+                  })}
+                </div>
+              </StaggerContainer>
+            </div>
+          </FadeIn>
+        </div>
+      </section>
+
+      {/* FOOTER */}
+      <footer className="border-t border-stone-200 dark:border-stone-800">
+        <div className="mx-auto flex max-w-[1440px] flex-col items-start justify-between gap-2 px-6 py-6 text-xs uppercase tracking-[0.2em] text-stone-500 dark:text-stone-400 sm:flex-row sm:items-center md:px-10">
+          <span>© {new Date().getFullYear()} Daniel Gitau</span>
+          <span className="flex items-center gap-1">
+            Built with Next.js <Dot /> Tailwind
+          </span>
+        </div>
       </footer>
     </div>
   );
-}
+};
 
 export default Home;
