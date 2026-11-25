@@ -1,4 +1,4 @@
-const projects = [
+export const projects = [
   {
     slug: "rentwise",
     title: "RentWise Management",
@@ -261,62 +261,35 @@ const projects = [
       },
     ],
   },
-
-  {
-    slug: "e-occurrence",
-    title: "e-Occurrence System",
-
-    shortDescription:
-    "Digital occurrence and case management system for structured reporting, case tracking, record management, and efficient information retrieval.",
-    description:
-    "e-Occurrence replaces traditional paper-based occurrence book workflows with a centralized digital system for recording, organizing, and tracking reported incidents. The platform structures occurrence records and case information into searchable digital records, making it easier to follow cases, retrieve historical information, and maintain consistent documentation. Built around structured data and controlled workflows, the system provides a more reliable foundation for managing incident records and maintaining an auditable history of case activity.",
-    
-    overview:
-      "The e-Occurrence System digitizes the traditional occurrence book workflow by providing a structured platform for recording incidents, managing case information, and retrieving historical records efficiently. The system focuses on organized data management, traceability, and faster access to occurrence records.",
-
-    features: [
-      "Digital occurrence reporting",
-      "Case tracking and management",
-      "Structured incident records",
-      "Advanced record searching",
-      "Audit trail support",
-      "Role-based access control",
-      "Relational database architecture",
-      "Responsive web interface",
-    ],
-
-    stack: [
-      "Django",
-      "PostgreSQL",
-      "JavaScript",
-      "Tailwind CSS",
-    ],
-
-    github: "https://github.com/DannyDuke77/E-Occurrence",
-
-    demo: "#",
-
-    screenshots: [
-      {
-        src: "/images/projects/e-occurrence/dashboard.png",
-        alt: "e-Occurrence dashboard",
-        title: "Dashboard",
-        description: "Overview of recent occurrences and case statistics.",
-      },
-      {
-        src: "/images/projects/e-occurrence/new-occurrence.png",
-        alt: "e-Occurrence new occurrence form",
-        title: "New Occurrence",
-        description: "Form for reporting a new incident with structured fields.",
-      },
-      {
-        src: "/images/projects/e-occurrence/occurrence-details.png",
-        alt: "e-Occurrence details view",
-        title: "Occurrence Details",
-        description: "Detailed view of a specific occurrence with case information.",
-      },
-    ],
-  },
 ];
 
-export default projects;
+export const smallProjects = [
+  {
+    title: "e-Occurrence System",
+    description:
+      "Digital occurrence-book and case-management system. Replaces paper incident records with structured reporting, case tracking, and auditable history — role-based access for officers and administrators.",
+    stack: ["Django", "PostgreSQL", "JavaScript", "Tailwind CSS"],
+    github: "https://github.com/DannyDuke77/E-Occurrence",
+  },
+  {
+    title: "SmartLesson Planner",
+    description:
+      "Lesson-planning and supervision system for Kenyan CBC schools. Teachers create and submit plans; administrators review, approve, and track coverage — with PDF/Excel exports and role-based access.",
+    stack: ["Django", "SQLite", "ReportLab", "OpenPyXL"],
+    github: "https://github.com/DannyDuke77/SmartLesson",
+  },
+  {
+    title: "Skill-Aware",
+    description:
+      "Collaborative project-management platform for student groups. Skill-based task matching, group invitations, deliverables, submissions, discussion threads, and PDF group reports.",
+    stack: ["Django", "SQLite", "ReportLab"],
+    github: "https://github.com/DannyDuke77/Skill-Aware",
+  },
+  {
+    title: "eBursary",
+    description:
+      "Bursary application and beneficiary-management system. Automated need-based scoring, document uploads, appeals workflow, and CSV/XLSX exports for approved beneficiaries.",
+    stack: ["Django", "SQLite", "OpenPyXL"],
+    github: "https://github.com/DannyDuke77/eBursary",
+  },
+];
