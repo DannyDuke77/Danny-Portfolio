@@ -27,6 +27,6 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-html {
+html:focus-within {
   scroll-behavior: smooth;
 }

@@ -8,7 +8,7 @@ interface PreviewCvButtonProps {
 const PreviewCvButton = ({ className }: PreviewCvButtonProps) => {
   const modal = useCvModal();
 
-  const cvUrl = "/cv/GITAU DANIEL NGIGE CV.pdf";
+  const cvUrl = "/cv";
   const fileName = "GITAU DANIEL NGIGE CV.pdf";
 
   return (

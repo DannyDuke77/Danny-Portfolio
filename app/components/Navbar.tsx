@@ -25,10 +25,20 @@ const Navbar = () => {
   ];
 
   const navLink =
-    "text-[11px] uppercase tracking-[0.2em] text-stone-500 transition-colors hover:text-lime-700 dark:text-stone-400 dark:hover:text-lime-300";
+    "text-[11px] py-1 uppercase tracking-[0.2em] text-stone-500 transition-colors hover:text-lime-700 dark:text-stone-400 dark:hover:text-lime-300";
 
   const desktopBreakpoint = isProjectPage ? "lg" : "md";
 
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (href.startsWith("#")) {
+      const target = document.querySelector(href);
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: "smooth" });
+        window.history.pushState(null, "", href);
+      }
+    }
+  };
   return (
     <header className="fixed top-0 left-0 z-50 w-full border-b border-stone-200 bg-stone-50/95 backdrop-blur-sm dark:border-stone-800 dark:bg-stone-950/95">
       <nav className="mx-auto flex h-14 max-w-[1440px] items-center justify-between px-6 md:px-10">
@@ -54,14 +64,24 @@ const Navbar = () => {
               </Link>
               <span className="h-4 w-px bg-stone-200 dark:bg-stone-800" />
               {projectLinks.map((link) => (
-                <Link key={link.name} href={link.href} className={navLink}>
+                <Link 
+                  key={link.name} 
+                  href={link.href} 
+                  onClick={(e) => handleNavClick(e, link.href)} 
+                  className={navLink}
+                >
                   {link.name}
                 </Link>
               ))}
             </>
           ) : (
             links.map((link) => (
-              <Link key={link.name} href={link.href} className={navLink}>
+              <Link 
+                key={link.name} 
+                href={link.href} 
+                onClick={(e) => handleNavClick(e, link.href)} 
+                className={navLink}
+              >
                 {link.name}
               </Link>
             ))
@@ -141,7 +161,10 @@ const Navbar = () => {
                 <Link
                   key={link.name}
                   href={link.href}
-                  onClick={() => setIsOpen(false)}
+                  onClick={(e) => {
+                    setIsOpen(false);
+                    handleNavClick(e, link.href);
+                  }}
                   className={navLink}
                 >
                   {link.name}
@@ -154,7 +177,10 @@ const Navbar = () => {
                 <Link
                   key={link.name}
                   href={link.href}
-                  onClick={() => setIsOpen(false)}
+                  onClick={(e) => {
+                    setIsOpen(false);
+                    handleNavClick(e, link.href);
+                  }}
                   className={navLink}
                 >
                   {link.name}
@@ -170,7 +196,12 @@ const Navbar = () => {
 
             <Link
               href={isProjectPage ? "/#contact" : "#contact"}
-              onClick={() => setIsOpen(false)}
+              onClick={(e) => {
+                setIsOpen(false);
+                if (!isProjectPage) {
+                  handleNavClick(e, "#contact");
+                }
+              }}
               className="inline-flex w-full items-center justify-center gap-1.5 border border-lime-700 bg-lime-700 px-4 py-2.5 text-[11px] font-semibold uppercase tracking-[0.2em] text-stone-50 dark:border-lime-300 dark:bg-lime-300 dark:text-black"
             >
               Let's Talk
