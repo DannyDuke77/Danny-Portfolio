@@ -4,7 +4,14 @@ const nextConfig: NextConfig = {
   /* config options here */
   reactCompiler: true,
   allowedDevOrigins: ['192.168.0.107'],
-
+  async rewrites() {
+    return [
+      {
+        source: '/cv',
+        destination: process.env.CLOUDINARY_CV_URL || '#',
+      },
+    ];
+  },
 };
 
 export default nextConfig;
